@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday, PeepSqueak🐥! 🎉</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #FFB6C1, #FFD700);
+      color: #333;
+      text-align: center;
+      padding: 2rem;
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      padding: 3rem;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    h1 {
+      color: #ff69b4;
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
+
+    .question {
+      font-size: 1.3rem;
+      margin: 1.5rem 0;
+      font-weight: 500;
+    }
+
+    .options button {
+      background: #ffccf9;
+      border: none;
+      padding: 1rem 1.5rem;
+      margin: 1rem 0.5rem;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    .options button:hover {
+      background: #ffb6e6;
+      transform: translateY(-5px);
+    }
+
+    .result {
+      font-size: 1.5rem;
+      margin-top: 3rem;
+      color: #cc3366;
+      font-weight: 700;
+      display: none;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .wish {
+      font-size: 1.3rem;
+      margin-top: 2rem;
+      color: #444;
+      line-height: 1.6;
+      display: none;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    .celebration {
+      font-size: 3rem;
+      color: #ff69b4;
+      margin-top: 1.5rem;
+      display: none;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎉 Happy Birthday, Pooja! 🎉</h1>
+    <div id="quiz">
+      <div class="question" id="question"></div>
+      <div class="options" id="options"></div>
+    </div>
+    <div id="result" class="result"></div>
+    <div id="wish" class="wish"></div>
+    <div id="celebration" class="celebration">🎉🎂💖</div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        q: "What’s your ideal way to celebrate your birthday?",
+        options: ["A cozy night with close friends", "A wild party", "A solo spa day", "Food adventure"]
+      },
+      {
+        q: "Which gift would make you smile the most?",
+        options: ["A handwritten letter", "A surprise trip", "Something sparkly", "A thoughtful DIY present"]
+      },
+      {
+        q: "Your vibe today is...",
+        options: ["Queen of the world 👑", "Chill and radiant 🌼", "Hilariously chaotic 😂", "Dreamy and magical ✨"]
+      },
+      {
+        q: "Pick a birthday dessert:",
+        options: ["Chocolate cake 🍫", "Ice cream sundae 🍨", "Cupcakes 🧁", "Lollipop 🍓"]
+      },
+      {
+        q: "How should your friends show love today?",
+        options: ["Send heartfelt messages 💌", "Plan a surprise 🎉", "Spend time with me 🫶", "Memes and jokes 😜"]
+      }
+    ];
+
+    let current = 0;
+    let answers = [];
+
+    const questionEl = document.getElementById('question');
+    const optionsEl = document.getElementById('options');
+    const resultEl = document.getElementById('result');
+    const wishEl = document.getElementById('wish');
+    const celebrationEl = document.getElementById('celebration');
+
+    function showQuestion() {
+      const q = questions[current];
+      questionEl.innerText = q.q;
+      optionsEl.innerHTML = '';
+      q.options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.innerText = opt;
+        btn.onclick = () => {
+          answers.push(opt);
+          nextQuestion();
+        };
+        optionsEl.appendChild(btn);
+      });
+    }
+
+    function nextQuestion() {
+      current++;
+      if (current < questions.length) {
+        showQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      document.getElementById('quiz').style.display = 'none';
+      resultEl.style.display = 'block';
+      celebrationEl.style.display = 'block';
+
+      let birthdayWish = "";
+
+      if (answers.includes("A cozy night with close friends") && answers.includes("A handwritten letter")) {
+        birthdayWish = "Wow, you really know how to live it up with a cozy night and a heartfelt letter. Can't wait for this unforgettable adventure! 🎉";
+      } else if (answers.includes("A wild party") && answers.includes("A surprise trip")) {
+        birthdayWish = "A party animal and a jet-setter! Who needs sleep when you can have endless fun and surprises? Here's to your non-stop party life! 🥳✈️";
+      } else if (answers.includes("A solo spa day") && answers.includes("Something sparkly")) {
+        birthdayWish = "Of course, you need to recharge with a solo spa day and bling-bling! Just don’t forget the diamonds while you relax, okay? 💎💅";
+      } else if (answers.includes("Food adventure") && answers.includes("A thoughtful DIY present")) {
+        birthdayWish = "Because who doesn’t want to eat their way through life with a side of hand-made love? Let’s hope the food’s as good as your taste in gifts. 🍔🎁";
+      }
+
+      resultEl.innerText = "Oh, look at you! Making birthday wishes come true, one sarcastic comment at a time! 🙄🎉";
+      wishEl.style.display = 'block';
+      wishEl.innerHTML = `
+        💖 Oh, pooh,<br><br>
+        I’m honestly shocked you’re this old already, but hey, at least you’re still managing to *gracefully* age, right? 😜<br><br>
+        Despite your attempts at being a minimalist, you're the most *extra* person I know—and that’s exactly why I adore you.<br><br>
+        May your day be filled with cake, chaos, and the fact that you’ve now added another year to the list of things I’ll have to tease you about forever. 🎂<br><br>
+        Happy Birthday, you wonderful disaster. Love you loads! 💖
+      `;
+    }
+
+    showQuestion();
+  </script>
+</body>
+</html>
